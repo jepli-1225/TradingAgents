@@ -10,6 +10,10 @@ from .y_finance import (
     get_income_statement as get_yfinance_income_statement,
     get_insider_transactions as get_yfinance_insider_transactions,
 )
+from .mt5_stock import (
+    get_mt5_stock,
+    get_mt5_indicators,
+)
 from .yfinance_news import get_news_yfinance, get_global_news_yfinance
 from .alpha_vantage import (
     get_stock as get_alpha_vantage_stock,
@@ -63,17 +67,20 @@ TOOLS_CATEGORIES = {
 VENDOR_LIST = [
     "yfinance",
     "alpha_vantage",
+    "mt5",
 ]
 
 # Mapping of methods to their vendor-specific implementations
 VENDOR_METHODS = {
     # core_stock_apis
     "get_stock_data": {
+        "mt5": get_mt5_stock,
         "alpha_vantage": get_alpha_vantage_stock,
         "yfinance": get_YFin_data_online,
     },
     # technical_indicators
     "get_indicators": {
+        "mt5": get_mt5_indicators,
         "alpha_vantage": get_alpha_vantage_indicator,
         "yfinance": get_stock_stats_indicators_window,
     },
